@@ -20,13 +20,13 @@ export const login = async (req, res) => {
       (() => res.status(401).json({ error: "Password Incorrect" }))();
 
     const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1m",
+      expiresIn: "10m",
     });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     res.status(200).json({
       message: "Login successful",
-      token: { token, expiresIn: "1m" },
+      token: { token, expiresIn: "10m" },
       user,
       decoded: { user_id: decoded.user_id, expiry: decoded.exp },
     });
